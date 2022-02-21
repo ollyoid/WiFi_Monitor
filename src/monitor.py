@@ -30,7 +30,6 @@ servers = []
 threads = None
 
 while True:
-
     try:
         s = speedtest.Speedtest()
         s.get_servers(servers)
@@ -43,7 +42,6 @@ while True:
         print(e)
         print("end")
         continue
-
     results_dict = s.results.dict()
     print(results_dict)
 
@@ -52,7 +50,6 @@ while True:
         if (file.tell() == 0):
             writer.writeheader()
         writer.writerow(results_dict)
-
     try:
         image = plotter.get_img()
     except ValueError: # This might happen when log is still empty and spline can't be generated 
@@ -69,8 +66,9 @@ while True:
         font=font,
         fill=0,
     )
-
     # Display image
     image = image.rotate(180)
     display.image(image)
     display.show()
+    image.close()
+    del image

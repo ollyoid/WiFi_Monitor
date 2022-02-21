@@ -4,7 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy.interpolate import interp1d
 import datetime
-
+import gc
 import io
 from PIL import Image
 
@@ -57,6 +57,8 @@ def create_plot(log="log.csv"):
     ax2.get_yaxis().set_tick_params(direction='in', labelsize=20, pad=-30)
 
     fig.legend([' ', ' ', ' '], loc = 8, fancybox=False, frameon=False, ncol=3, markerscale=4, numpoints=20, columnspacing=10, handlelength=15)
+    del df
+    del rolling
 
 
 def get_img():
@@ -66,6 +68,10 @@ def get_img():
 
     im = Image.open(img_buf)
     im = im.resize((400,240)).convert('1')
+    del img_buf
+    plt.clf()
+    plt.close("all")
+    gc.collect()
     return im
 
 
