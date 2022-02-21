@@ -27,9 +27,9 @@ def create_plot(log="log.csv"):
     df['download_r'] = rolling['download']
     df['ping_r'] = rolling['ping']
 
-    upload_curve = interp1d(df['seconds'], df['upload_r'], kind = 'cubic')
-    download_curve = interp1d(df['seconds'], df['download_r'], kind = 'cubic')
-    ping_curve = interp1d(df['seconds'], df['ping_r'], kind = 'cubic')
+    upload_curve = interp1d(df['seconds'], df['upload_r'], kind = 'linear')
+    download_curve = interp1d(df['seconds'], df['download_r'], kind = 'linear')
+    ping_curve = interp1d(df['seconds'], df['ping_r'], kind = 'linear')
 
         
     # Returns evenly spaced numbers over upto last day.
@@ -55,6 +55,8 @@ def create_plot(log="log.csv"):
     ax2.xaxis.set_visible(False)
     ax1.get_yaxis().set_tick_params(direction='in', labelsize=20, pad=-35)
     ax2.get_yaxis().set_tick_params(direction='in', labelsize=20, pad=-30)
+
+    fig.legend([' ', ' ', ' '], loc = 8, fancybox=False, frameon=False, ncol=3, markerscale=4, numpoints=20, columnspacing=10, handlelength=15)
 
 
 def get_img():

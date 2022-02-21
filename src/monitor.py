@@ -61,16 +61,16 @@ while True:
     # Get drawing object to draw on image.
     draw = ImageDraw.Draw(image)
     
-    text = f"Upload: {results_dict['upload']/1000000:.2f}Mbps  Download:  {results_dict['download']/1000000:.2f}Mbps  Ping: {results_dict['ping']:.2f}ms"
+    text = f"    Upload: {results_dict['upload']/1000000:.2f}Mbps  Download:  {results_dict['download']/1000000:.2f}Mbps  Ping: {results_dict['ping']:.2f}ms"
     (font_width, font_height) = font.getsize(text)
     draw.text(
-            (5, display.height-15),
+            (5, display.height-30),
         text,
         font=font,
         fill=0,
     )
 
     # Display image
-    image.rotate(90)
+    image = image.rotate(180)
     display.image(image)
     display.show()
