@@ -1,4 +1,5 @@
 # WiFi Monitor
+![the 3D printed case and monitor](/img/main.jpg)
 > A Raspberry Pi based internet speed monitor
 
 `git clone https://github.com/ollyoid/WiFi_Monitor.git `
