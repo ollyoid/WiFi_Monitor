@@ -33,7 +33,7 @@ def create_plot(log="log.csv"):
 
         
     # Returns evenly spaced numbers over upto last day.
-    X_ = np.linspace(max(df['seconds'].min(), now-(24*60*60)*100000000), df['seconds'].max(), 1000)
+    X_ = np.linspace(max(df['seconds'].min(), (now-(24*60*60))*1000000000), df['seconds'].max(), 1000)
 
     fig, ax1 = plt.subplots(figsize=(12, 7.2), tight_layout=True)
 

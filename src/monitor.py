@@ -6,6 +6,8 @@ import adafruit_sharpmemorydisplay
 import speedtest
 import csv
 import plotter
+import time
+import socket
 
 keys = ["upload", "download", "ping",  "timestamp", "bytes_sent", "bytes_received"]
 
@@ -28,6 +30,15 @@ font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", FON
 # Speedtest stuff
 servers = []
 threads = None
+
+def get_ip():
+    try:
+        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        s.connect(("8.8.8.8", 80))
+        return s.getsockname()[0]
+    except:
+        return "No IP"
+
 
 while True:
     try:
@@ -60,12 +71,11 @@ while True:
     
     text = f"    Upload: {results_dict['upload']/1000000:.2f}Mbps  Download:  {results_dict['download']/1000000:.2f}Mbps  Ping: {results_dict['ping']:.2f}ms"
     (font_width, font_height) = font.getsize(text)
-    draw.text(
-            (5, display.height-30),
-        text,
-        font=font,
-        fill=0,
-    )
+    draw.text((5, display.height-30), text, font=font, fill=0)
+
+    t = time.localtime()
+    text = f" Last updated: {t.tm_hour}:{t.tm_min}, IP: {get_ip()}"
+    draw.text((5, 5), text, font=font, fill=0)
     # Display image
     image = image.rotate(180)
     display.image(image)
